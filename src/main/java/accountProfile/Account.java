@@ -1,4 +1,4 @@
-package AccountProfile;
+package accountProfile;
 
 
 //Тут ничего необычного, просто аккаунт юзера, конструкторы, его геттеры и сеттеры

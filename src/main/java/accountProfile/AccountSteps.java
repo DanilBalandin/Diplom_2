@@ -1,4 +1,4 @@
-package AccountProfile;
+package accountProfile;
 
 import constants.Url;
 import io.qameta.allure.Description;
