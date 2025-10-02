@@ -46,7 +46,7 @@ public class TestDataManager {
     }
 
     public static Account createAndRegisterAccount() {
-        Account account = TestAccountOrder.createRandomAccount();
+        Account account = TestAccountBuilder.createRandomAccount();
         registerAccountAndGetToken(account);
         return account;
     }

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 //Планирую вынести создание тестовых-аккаунтов в отдельный "менеджер аккаунтов"
 
-public class TestAccountOrder {
+public class TestAccountBuilder {
 
     //Создаем рандомный аккаунт
     public static Account createRandomAccount() {
