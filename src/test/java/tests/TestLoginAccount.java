@@ -36,7 +36,7 @@ public class TestLoginAccount {
         createdAccounts.add(testAccount);
 
         accountSteps.createNewUser(testAccount);
-        accountSteps.Authentication(testAccount).then()
+        accountSteps.authenticate(testAccount).then()
                 .statusCode(SC_OK)
                 .extract()
                 .path("success", String.valueOf(equalTo("true")));
@@ -51,7 +51,7 @@ public class TestLoginAccount {
         Account incorrectEmailAccount = TestAccountBuilder.createAccountWithWrongEmail(correctAccount);
         createdAccounts.add(correctAccount);
 
-        accountSteps.Authentication(incorrectEmailAccount)
+        accountSteps.authenticate(incorrectEmailAccount)
                 .then()
                 .assertThat()
                 .statusCode(SC_UNAUTHORIZED)
@@ -67,7 +67,7 @@ public class TestLoginAccount {
         createdAccounts.add(correctAccount);
 
 
-        accountSteps.Authentication(incorrectPasswordAccount)
+        accountSteps.authenticate(incorrectPasswordAccount)
                 .then()
                 .assertThat()
                 .statusCode(SC_UNAUTHORIZED)

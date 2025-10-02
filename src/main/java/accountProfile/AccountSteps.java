@@ -26,7 +26,7 @@ public class AccountSteps extends Url {
     // Тут логинимся
     @Step("Аутентификация")
     @Description("Будем передавать данные для авторизации")
-    public Response Authentication(Account userData) {
+    public Response authenticate(Account userData) {
         setUrl();
         return given()
                 .header("Content-type", "application/json")
@@ -37,7 +37,7 @@ public class AccountSteps extends Url {
     // Обновляем данные
     @Step("Изменения в аккаунте")
     @Description("Обновляем данные")
-    public Response AccountUpdate(String accessToken, Account userData) {
+    public Response accountUpdate(String accessToken, Account userData) {
         setUrl();
         return given()
                 .header("Authorization", accessToken)

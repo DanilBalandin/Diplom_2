@@ -13,7 +13,7 @@ public class TestDataManager {
 
     public static String registerAccountAndGetToken(Account account) {
         accountSteps.createNewUser(account);
-        return accountSteps.Authentication(account)
+        return accountSteps.authenticate(account)
                 .then()
                 .statusCode(SC_OK)
                 .extract()
@@ -23,7 +23,7 @@ public class TestDataManager {
     public static void safelyDeleteAccount(Account account) {
         if (isAccountDeletable(account)) {
             try {
-                String accessToken = accountSteps.Authentication(account)
+                String accessToken = accountSteps.authenticate(account)
                         .then()
                         .extract()
                         .path("accessToken");

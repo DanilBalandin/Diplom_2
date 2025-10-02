@@ -28,14 +28,4 @@ public class Account {
     }
 
 
-
-    // Пригодится для шага с завершением сеанса
-    public static class SessionTerminationPayload {
-        public final String refreshToken;
-
-        public SessionTerminationPayload(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
-    }
-
 }

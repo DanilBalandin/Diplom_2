@@ -42,7 +42,7 @@ public class TestUpdateAccount {
         String newEmail = "user." + UUID.randomUUID().toString().substring(0, 8) + "@yandex.ruhaha";
         Account updatedAccountData = new Account(newEmail, account.getName(), account.getPassword());
 
-        String actualEmail = accountSteps.AccountUpdate(accessToken,updatedAccountData ).then()
+        String actualEmail = accountSteps.accountUpdate(accessToken,updatedAccountData ).then()
                 .assertThat()
                 .statusCode(SC_OK)  // Добавляем проверку статуса
                 .extract()
@@ -60,7 +60,7 @@ public class TestUpdateAccount {
         String newName = "TestAccount_" + UUID.randomUUID().toString().substring(0, 8);
         Account updatedAccountData = new Account(account.getEmail(), newName, account.getPassword());
 
-        String actualName = accountSteps.AccountUpdate(accessToken, updatedAccountData).then()
+        String actualName = accountSteps.accountUpdate(accessToken, updatedAccountData).then()
                 .assertThat()
                 .statusCode(SC_OK)
                 .extract()
@@ -77,7 +77,7 @@ public class TestUpdateAccount {
         String newPassword = "samplePassword@" + UUID.randomUUID().toString().substring(0, 8);
         Account updatedAccountData = new Account(account.getEmail(), account.getName(), newPassword);
 
-        Boolean success = accountSteps.AccountUpdate(accessToken, updatedAccountData).then()
+        Boolean success = accountSteps.accountUpdate(accessToken, updatedAccountData).then()
                 .assertThat()
                 .statusCode(SC_OK)
                 .extract()
@@ -92,7 +92,7 @@ public class TestUpdateAccount {
     @DisplayName("Проверка ошибки, без авторизации")
     public void updateWithoutAuthorization() {
         Account clientNewEmail = new Account(account.getEmail(), account.getName(), account.getPassword());
-        accountSteps.AccountUpdate("", clientNewEmail)
+        accountSteps.accountUpdate("", clientNewEmail)
                 .then()
                 .statusCode(SC_UNAUTHORIZED)
                 .body(equalTo(UNAUTHORIZED_OPERATION));
