@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 public class OrderIngredientSteps extends Url {
 
 
-   private Order order;
+   private final Order order;
 
     public OrderIngredientSteps(Order order) {
         this.order = order;

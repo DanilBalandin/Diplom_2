@@ -14,7 +14,6 @@ import java.util.List;
 
 import static constants.Response.AccountResponses.DUPLICATE_ACCOUNT;
 import static constants.Response.AccountResponses.INCOMPLETE_REGISTRATION_DATA;
-import static org.apache.commons.lang3.BooleanUtils.and;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -24,9 +23,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class TestCreateAccount {
 
     private final AccountSteps accountSteps = new AccountSteps();
-    private Account account;
-    private String accessToken;
-    private List<Account> createdAccounts = new ArrayList<>();
+    public Account account;
+    public String accessToken;
+    private final List<Account> createdAccounts = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {

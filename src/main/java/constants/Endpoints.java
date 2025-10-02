@@ -11,7 +11,6 @@ public class Endpoints {
         public final static String REGISTER_ACCOUNT = "/api/auth/register";
         public final static String AUTHENTICATE_ACCOUNT = "/api/auth/login";
         public final static String UPDATE_ACCOUNT = "/api/auth/user";
-        public final static String TERMINATE_SESSION = "/api/v1/logout";
         public final static String REMOVE_ACCOUNT = "/api/auth/user";
     }
 

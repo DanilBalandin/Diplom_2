@@ -45,10 +45,6 @@ public class TestDataManager {
                 !account.getPassword().isEmpty();
     }
 
-    public static Account createAndRegisterAccount() {
-        Account account = TestAccountBuilder.createRandomAccount();
-        registerAccountAndGetToken(account);
-        return account;
-    }
+
 
 }

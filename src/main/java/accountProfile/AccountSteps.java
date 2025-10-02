@@ -46,18 +46,6 @@ public class AccountSteps extends Url {
                 .patch(UPDATE_ACCOUNT);
     }
 
-    // Завершаем пользовательскую сессию
-    @Step("Завершение сеанса")
-    @Description("Вытягиваем refreshToken из логина и отправляем Post запрос")
-    public Response TermSession(Account userData) {
-        setUrl();
-        // Зашиваю в refreshToken сам токен, вытягивая его из ответа при логине
-        String refreshToken = Authentication(userData).then().extract().path("refreshToken");
-        return given()
-                .header("Content-type", "application/json")
-                .body(new Account.SessionTerminationPayload(refreshToken))
-                .post(TERMINATE_SESSION);
-    }
 
     @Step("Удаление аккаунта")
     @Description("Передаем токен и вызываем метод Delete")

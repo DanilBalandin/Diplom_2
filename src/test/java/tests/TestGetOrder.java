@@ -1,7 +1,6 @@
 package tests;
 
 import accountProfile.Account;
-import accountProfile.AccountSteps;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import orderProcedure.Order;
@@ -24,12 +23,12 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TestGetOrder {
 
-    private OrderSteps orderSteps = new OrderSteps();
+    private final OrderSteps orderSteps = new OrderSteps();
     private Order order;
     private OrderIngredientSteps orderIngredientSteps;
-    private Account account;
+    public Account account;
     private String accessToken;
-    private List<Account> createdAccounts = new ArrayList<>();
+    private final List<Account> createdAccounts = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {

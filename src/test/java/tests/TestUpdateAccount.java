@@ -2,8 +2,7 @@ package tests;
 
 import accountProfile.Account;
 import accountProfile.AccountSteps;
-import io.qameta.allure.Description;
-import io.restassured.response.Response;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +26,7 @@ public class TestUpdateAccount {
     private final AccountSteps accountSteps = new AccountSteps();
     private Account account;
     private String accessToken;
-    private List<Account> createdAccounts = new ArrayList<>();
+    private final List<Account> createdAccounts = new ArrayList<>();
 
 
 

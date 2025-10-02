@@ -5,9 +5,9 @@ package accountProfile;
 // Вообще я ознакамливался с лумбуком, чтобы его тут использоваться (на работе просто его юзают), но не стал.
 public class Account {
 
-    private String email;
-    private String name;
-    private String password;
+    private final String email;
+    private final String name;
+    private final String password;
 
     public Account(String email, String name, String password) {
         this.email = email;
@@ -31,7 +31,7 @@ public class Account {
 
     // Пригодится для шага с завершением сеанса
     public static class SessionTerminationPayload {
-        private final String refreshToken;
+        public final String refreshToken;
 
         public SessionTerminationPayload(String refreshToken) {
             this.refreshToken = refreshToken;

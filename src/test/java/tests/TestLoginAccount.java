@@ -19,9 +19,9 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TestLoginAccount {
     private final AccountSteps accountSteps = new AccountSteps();
-    private Account account;
-    private String accessToken;
-    private List<Account> createdAccounts = new ArrayList<>();
+    public Account account;
+    public String accessToken;
+    private final List<Account> createdAccounts = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
