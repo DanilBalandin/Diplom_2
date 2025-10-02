@@ -1,6 +1,7 @@
 package AccountProfile;
 
 import constants.Url;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -13,6 +14,7 @@ public class AccountSteps extends Url {
 
     // Тут регаем нового пользователя
     @Step("Создание нового пользователя")
+    @Description("Будем передавать данные для регистрации")
     public Response createNewUser(Account userData) {
         setUrl();
         return given()
@@ -23,6 +25,7 @@ public class AccountSteps extends Url {
 
     // Тут логинимся
     @Step("Аутентификация")
+    @Description("Будем передавать данные для авторизации")
     public Response Authentication(Account userData) {
         setUrl();
         return given()
@@ -33,6 +36,7 @@ public class AccountSteps extends Url {
     }
     // Обновляем данные
     @Step("Изменения в аккаунте")
+    @Description("Обновляем данные")
     public Response AccountUpdate(String accessToken, Account userData) {
         setUrl();
         return given()
@@ -44,6 +48,7 @@ public class AccountSteps extends Url {
 
     // Завершаем пользовательскую сессию
     @Step("Завершение сеанса")
+    @Description("Вытягиваем refreshToken из логина и отправляем Post запрос")
     public Response TermSession(Account userData) {
         setUrl();
         // Зашиваю в refreshToken сам токен, вытягивая его из ответа при логине
@@ -54,6 +59,16 @@ public class AccountSteps extends Url {
                 .post(TERMINATE_SESSION);
     }
 
-
-
+    @Step("Удаление аккаунта")
+    @Description("Передаем токен и вызываем метод Delete")
+    public Response executeAccountRemoval(String accessToken) {
+        setUrl();
+        return given()
+                .header("Authorization", accessToken)
+                .delete(REMOVE_ACCOUNT);
+    }
 }
+
+
+
+
