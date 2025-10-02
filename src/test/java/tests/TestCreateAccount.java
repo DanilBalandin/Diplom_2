@@ -55,7 +55,7 @@ public class TestCreateAccount {
     public void createDuplicateAccount() {
 
         Account testAccount = TestAccountBuilder.createRandomAccount();
-        createdAccounts.add(testAccount);
+
 
         accountSteps.createNewUser(testAccount).then()
                 .assertThat()
@@ -71,7 +71,7 @@ public class TestCreateAccount {
     public void createAccountWithoutEmail() {
 
         Account testAccount = TestAccountBuilder.createAccountWithoutEmail();
-        createdAccounts.add(testAccount);
+
 
         accountSteps.createNewUser(testAccount).then()
                 .assertThat()
@@ -86,7 +86,7 @@ public class TestCreateAccount {
     public void createAccountWithoutPassword() {
 
         Account testAccount = TestAccountBuilder.createAccountWithoutPassword();
-        createdAccounts.add(testAccount);
+
 
         accountSteps.createNewUser(testAccount).then()
                 .assertThat()
@@ -101,7 +101,6 @@ public class TestCreateAccount {
     public void createAccountWithoutName() {
 
         Account testAccount = TestAccountBuilder.createAccountWithoutName();
-        createdAccounts.add(testAccount);
 
         accountSteps.createNewUser(testAccount).then()
                 .assertThat()

@@ -19,15 +19,6 @@ public class TestAccountBuilder {
         );
     }
 
-    public static Account createAccountWithSpecificEmail(String email) {
-        String uniqueId = UUID.randomUUID().toString().substring(0, 8);
-        return new Account(
-                email,
-                "TestAccount_" + uniqueId,
-                "samplePassword@" + uniqueId
-        );
-
-    }
     //Без почты
     public static Account createAccountWithoutEmail() {
         String uniqueId = UUID.randomUUID().toString().substring(0, 8);
@@ -57,4 +48,27 @@ public class TestAccountBuilder {
         );
     }
 
+    public static Account createAccountWithModifiedEmail(Account originalAccount, String emailPrefix) {
+        return new Account(
+                emailPrefix + originalAccount.getEmail(),
+                originalAccount.getName(),
+                originalAccount.getPassword()
+        );
+    }
+
+    public static Account createAccountWithWrongEmail(Account originalAccount) {
+        return createAccountWithModifiedEmail(originalAccount, "fsd78ftsdhjg3_");
+    }
+
+    public static Account createAccountWithModifiedPassword(Account originalAccount, String passwordPrefix) {
+        return new Account(
+                passwordPrefix + originalAccount.getPassword(),
+                originalAccount.getName(),
+                originalAccount.getEmail()
+        );
+
+    }
+    public static Account createAccountWithWrongPassword(Account originalAccount) {
+        return createAccountWithModifiedPassword(originalAccount, "fsd78ftsdhjg3_");
+    }
 }
