@@ -15,7 +15,12 @@ import static io.restassured.RestAssured.given;
 public class OrderIngredientSteps extends Url {
 
 
-    Order order;
+   private Order order;
+
+    public OrderIngredientSteps(Order order) {
+        this.order = order;
+    }
+
 
     @Step("Список доступных ингредиентов")
     @Description("Будем получать список доступных ингредиентов")
@@ -26,14 +31,16 @@ public class OrderIngredientSteps extends Url {
     }
 
 
-    private void setIngredientsList() {
+    public List<String> getIngredientsList() {
         List<String> ingredients = requestIngredientsList()
                 .then()
                 .extract()
                 .path("data._id");
-        List<String> ingredientsList = order.getIngredients() ;
+        List<String> selectedIngredients  = order.getIngredients();
         for (int i = 0; i <= 8; i += 2) {
-            ingredientsList.add(ingredients.get(i));
+            selectedIngredients.add(ingredients.get(i));
+
         }
+        return selectedIngredients;
     }
 }

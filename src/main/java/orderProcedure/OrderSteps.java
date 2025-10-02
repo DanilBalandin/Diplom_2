@@ -13,7 +13,7 @@ public class OrderSteps extends Url {
 
     @Step("Создание заказа")
     @Description("Передаем токен и данные заказа, вызываем метод Post по эндпоинту, чтобы его создать")
-    public Response CreateOrder(String accessToken, Order order) {
+    public Response createOrder(String accessToken, Order order) {
         setUrl();
         return given()
                 .header("Content-type", "application/json")

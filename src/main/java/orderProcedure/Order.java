@@ -17,6 +17,10 @@ public class Order {
         return ingredients;
     }
 
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
 
 }
 
