@@ -44,7 +44,7 @@ public class TestUpdateAccount {
 
         String actualEmail = accountSteps.accountUpdate(accessToken,updatedAccountData ).then()
                 .assertThat()
-                .statusCode(SC_OK)  // Добавляем проверку статуса
+                .statusCode(SC_OK)
                 .extract()
                 .path("user.email");
 

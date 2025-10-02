@@ -42,7 +42,6 @@ public class TestGetOrder {
 
     @Test
     @DisplayName("Смотрим историю авторизованного п-ля")
-    @Description("Verify successful retrieval of transaction history for authenticated account holder")
     public void getOrderAuthorizedTest() {
         List<String> ingredients = orderIngredientSteps.getIngredientsList();
         order.setIngredients(ingredients);
