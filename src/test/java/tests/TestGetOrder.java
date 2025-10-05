@@ -1,6 +1,7 @@
 package tests;
 
 import accountProfile.Account;
+import accountProfile.AccountSteps;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import orderProcedure.Order;
@@ -11,9 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import testAccountData.TestAccountBuilder;
-import testAccountData.TestDataManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static constants.Response.AccountResponses.UNAUTHORIZED_OPERATION;
@@ -28,15 +27,18 @@ public class TestGetOrder {
     private OrderIngredientSteps orderIngredientSteps;
     public Account account;
     private String accessToken;
-    private final List<Account> createdAccounts = new ArrayList<>();
+    private AccountSteps accountSteps = new AccountSteps();
+
 
     @BeforeEach
     public void setUp() {
         account = TestAccountBuilder.createRandomAccount();
-        accessToken = TestDataManager.registerAccountAndGetToken(account);
+        Response registerAccount = accountSteps.createNewUser(account);
+        accessToken = registerAccount.jsonPath().getString("accessToken");
+
         order = new Order();
         orderIngredientSteps = new OrderIngredientSteps(order);
-        createdAccounts.add(account);
+
 
     }
 
@@ -67,10 +69,14 @@ public class TestGetOrder {
     }
 
     @AfterEach
-    public void tearDown () {
-        for (Account account : createdAccounts) {
-            TestDataManager.safelyDeleteAccount(account);
+    public void tearDown() {
+
+        if (accessToken != null) {
+            try {
+                accountSteps.deleteAccount(accessToken);
+            } catch (Exception e) {
+                System.out.println("Ошибка при удалении пользователя: " + e.getMessage());
+            }
         }
-        createdAccounts.clear();
     }
 }

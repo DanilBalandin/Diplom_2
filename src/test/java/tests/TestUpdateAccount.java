@@ -3,15 +3,13 @@ package tests;
 import accountProfile.Account;
 import accountProfile.AccountSteps;
 
+import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import testAccountData.TestAccountBuilder;
-import testAccountData.TestDataManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static constants.Response.AccountResponses.UNAUTHORIZED_OPERATION;
@@ -20,20 +18,21 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//Сломал себе всю голову как это правильно использовать вместе с билдером и менеджером, потом понял, что очень
-// хочу усложнить логику, но разве мы не должны ее наоборот упрощать? Поэтому тут я использовал обычный подход
+
 public class TestUpdateAccount {
     private final AccountSteps accountSteps = new AccountSteps();
     private Account account;
     private String accessToken;
-    private final List<Account> createdAccounts = new ArrayList<>();
 
 
 
     @BeforeEach
     public void setUp() {
+
         account = TestAccountBuilder.createRandomAccount();
-        accessToken = TestDataManager.registerAccountAndGetToken(account);
+        Response registerAccount = accountSteps.createNewUser(account);
+        accessToken = registerAccount.jsonPath().getString("accessToken");
+
     }
 
     @Test
@@ -50,7 +49,6 @@ public class TestUpdateAccount {
 
 
         account = updatedAccountData;
-        createdAccounts.add(account);
         assertEquals(newEmail, actualEmail);
     }
 
@@ -67,7 +65,6 @@ public class TestUpdateAccount {
                 .path("user.name");
 
         account = updatedAccountData;
-        createdAccounts.add(account);
         assertEquals(newName, actualName);
     }
 
@@ -84,7 +81,6 @@ public class TestUpdateAccount {
                 .path("success");
 
         account = updatedAccountData;
-        createdAccounts.add(account);
         assertEquals(true, success);
     }
 
@@ -98,11 +94,17 @@ public class TestUpdateAccount {
                 .body(equalTo(UNAUTHORIZED_OPERATION));
     }
     @AfterEach
-    public void tearDown () {
-        for (Account account : createdAccounts) {
-            TestDataManager.safelyDeleteAccount(account);
+    public void tearDown() {
+
+        if (accessToken != null) {
+            try {
+                accountSteps.deleteAccount(accessToken);
+            } catch (Exception e) {
+                System.out.println("Ошибка при удалении пользователя: " + e.getMessage());
+            }
         }
-        createdAccounts.clear();
+
+
     }
 
 }

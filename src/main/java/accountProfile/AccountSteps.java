@@ -49,7 +49,7 @@ public class AccountSteps extends Url {
 
     @Step("Удаление аккаунта")
     @Description("Передаем токен и вызываем метод Delete")
-    public Response executeAccountRemoval(String accessToken) {
+    public Response deleteAccount(String accessToken) {
         setUrl();
         return given()
                 .header("Authorization", accessToken)
